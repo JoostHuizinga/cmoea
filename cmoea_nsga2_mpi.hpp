@@ -33,7 +33,7 @@
 #include <sferes/ea/crowd.hpp>
 
 // Module includes
-#include <modules/misc/common_compare.hpp>
+#include <modules/datatools/common_compare.hpp>
 #include <modules/debugext/dbgext.hpp>
 
 // Local includes
@@ -526,7 +526,7 @@ public:
 
         size_t current = 0;
         std::vector<bool> done(nr_of_bins);
-        std::fill(done.begin(), done.end(), false);
+        std::fill<std::vector<bool> >(done.begin(), done.end(), false);
 
         // first round
         size_t world_size = this->eval().world()->size();
