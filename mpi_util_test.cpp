@@ -23,6 +23,7 @@
 #undef NDEBUG
 
 // Boost includes
+#include <boost/serialization/vector.hpp>
 #include <boost/test/unit_test.hpp>
 #include <boost/test/test_tools.hpp>
 
@@ -33,7 +34,8 @@
 #include "mpi_util.hpp"
 
 // Local debug macro
-#define DBO dbg::out(dbg::info, "mpi") << "["<< comm->rank() << "] "
+//#define DBO dbg::out(dbg::info, "mpi") << "["<< comm->rank() << "] "
+#define DBO std::cout << "["<< comm->rank() << "] "
 
 // Name spaces
 using namespace sferes;
@@ -81,6 +83,13 @@ BOOST_FIXTURE_TEST_CASE(mpi_util_test, ArgsFixture){
 	for (int i=0; i<recv_data.size(); ++i){
 		DBO << " got data " << recv_data[i] << std::endl;
 		packets_received[recv_data[i]] = true;
+	}
+
+	// recv_data data should NOT include our own data
+	for (int i=0; i<data.size(); ++i){
+		DBO << " my data " << data[i] << std::endl;
+		BOOST_TEST(!packets_received[data[i]]);
+		packets_received[data[i]] = true;
 	}
 
 	// Make sure all processes received all packets

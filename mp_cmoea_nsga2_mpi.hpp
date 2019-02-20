@@ -38,7 +38,7 @@
 #include <sferes/ea/crowd.hpp>
 
 // Module includes
-#include <modules/misc/common_compare.hpp>
+#include <modules/datatools/common_compare.hpp>
 #include <modules/debugext/dbgext.hpp>
 
 // Local includes

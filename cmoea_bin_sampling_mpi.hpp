@@ -194,7 +194,8 @@ public:
 
         size_t current = 0;
         std::vector<bool> done(this->max_bins);
-        std::fill(done.begin(), done.end(), false);
+        std::fill(done.begin(), done.end(), false); // @suppress("Ambiguous problem")
+//        std::fill<std::vector<bool>::iterator>(done.begin(), done.end(), false);
 
         // first round
         size_t world_size = this->eval().world()->size();

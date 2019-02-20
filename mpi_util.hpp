@@ -81,7 +81,9 @@ void isend(com_t comm, Ar_t& oa, int target, int tag, rv_t& reqs, sv_t& sizes){
 	MPI_Request* req1 = new MPI_Request();
 	MPI_Request* req2 = new MPI_Request();
     unsigned long* size_p = new unsigned long(oa.size());
-    const void* data_p = const_cast<void*>(oa.address());
+//    const void* data_p = const_cast<void*>(oa.address());
+    // Casting away const to support older versions (specifically 1.6.5) versions of openmpi
+    void* data_p = const_cast<void*>(oa.address());
     r = MPI_Isend(size_p, 1, MPI_UNSIGNED_LONG, target, tag, *comm, req1);
     if (r != 0) boost::throw_exception(boost::mpi::exception("MPI_Isend", r));
     r = MPI_Isend(data_p, oa.size(), MPI_PACKED, target, tag, *comm, req2);
