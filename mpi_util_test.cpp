@@ -34,8 +34,8 @@
 #include "mpi_util.hpp"
 
 // Local debug macro
-//#define DBO dbg::out(dbg::info, "mpi") << "["<< comm->rank() << "] "
-#define DBO std::cout << "["<< comm->rank() << "] "
+#define DBO dbg::out(dbg::info, "mpi") << "["<< comm->rank() << "] "
+//#define DBO std::cout << "["<< comm->rank() << "] "
 
 // Name spaces
 using namespace sferes;
